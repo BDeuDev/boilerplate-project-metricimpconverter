@@ -21,16 +21,20 @@ function ConvertHandler() {
   this.getUnit = function (input) {
     const m = input.match(/[a-zA-Z]+$/);
     if (!m) throw new Error('invalid unit');
-    const u = m[0].toLowerCase();
-    const valid = ['gal', 'l', 'mi', 'km', 'lbs', 'kg'];
-    if (!valid.includes(u)) throw new Error('invalid unit');
-    return u;
+    const raw = m[0];
+    const lower = raw.toLowerCase();
+
+    const normalized = (lower === 'l') ? 'L' : lower;
+
+    const valid = ['gal', 'L', 'mi', 'km', 'lbs', 'kg'];
+    if (!valid.includes(normalized)) throw new Error('invalid unit');
+    return normalized;
   };
 
   this.getReturnUnit = function (initUnit) {
     const map = {
-      gal: 'l',
-      l: 'gal',
+      gal: 'L',
+      L: 'gal',
       mi: 'km',
       km: 'mi',
       lbs: 'kg',
@@ -44,7 +48,7 @@ function ConvertHandler() {
   this.spellOutUnit = function (unit) {
     const names = {
       gal: 'gallons',
-      l: 'liters',
+      L: 'liters',
       mi: 'miles',
       km: 'kilometers',
       lbs: 'pounds',
@@ -62,7 +66,7 @@ function ConvertHandler() {
       case 'gal':
         result = initNum * galToL;
         break;
-      case 'l':
+      case 'L':
         result = initNum / galToL;
         break;
       case 'mi':
