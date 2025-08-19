@@ -35,7 +35,7 @@ suite('Unit Tests', function () {
         assert.strictEqual(result, 1, 'Should read 1 as default number when no numerical input is provided');
     });
     test('convertHandler should correctly read each valid input unit', function () {
-        const units = ['gal', 'l', 'mi', 'km', 'lbs', 'kg'];
+        const units = ['gal', 'L', 'mi', 'km', 'lbs', 'kg'];
         units.forEach(unit => {
             const input = `5${unit}`;
             const result = convertHandler.getUnit(input);
@@ -47,8 +47,8 @@ suite('Unit Tests', function () {
     });
     test('convertHandler should return the correct return unit for each valid input unit', function () {
         const inputOutput = {
-            'gal': 'l',
-            'l': 'gal',
+            'gal': 'L',
+            'L': 'gal',
             'mi': 'km',
             'km': 'mi',
             'lbs': 'kg',
@@ -63,7 +63,7 @@ suite('Unit Tests', function () {
     test('convertHandler should correctly return the spelled-out string unit for each valid input unit', function () {
         const names = {
             gal: 'gallons',
-            l: 'liters',
+            L: 'liters',
             mi: 'miles',
             km: 'kilometers',
             lbs: 'pounds',
@@ -84,7 +84,7 @@ suite('Unit Tests', function () {
     });
     test('convertHandler should correctly convert L to gal', function () {
         const inputNum = 1;
-        const inputUnit = 'l';
+        const inputUnit = 'L';
         const expected = 0.26417;
         const result = convertHandler.convert(inputNum, inputUnit);
         assert.approximately(result, expected, 0.00001, 'Should convert 1 L to approximately 0.26417 gal');
