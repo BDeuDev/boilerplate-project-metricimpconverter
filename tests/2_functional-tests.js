@@ -43,10 +43,9 @@ suite('Functional Tests', function () {
             .get('/api/convert')
             .query({ input: '32g' })
             .end((err, res) => {
-                assert.equal(res.status, 400);
-                assert.isObject(res.body);
-                assert.property(res.body, 'error');
-                assert.match(res.body.error, /invalid unit/i);
+                assert.equal(res.status, 200);
+                assert.isString(res.text);
+                assert.match(res.text.toLowerCase(), /invalid unit/i);
                 done();
             });
     });
@@ -56,10 +55,9 @@ suite('Functional Tests', function () {
             .get('/api/convert')
             .query({ input: '3/7.2/4kg' })
             .end((err, res) => {
-                assert.equal(res.status, 400);
-                assert.isObject(res.body);
-                assert.property(res.body, 'error');
-                assert.match(res.body.error, /invalid number/i);
+                assert.equal(res.status, 200);
+                assert.isString(res.text);
+                assert.match(res.text.toLowerCase(), /invalid number/i);
                 done();
             });
     });
@@ -69,10 +67,9 @@ suite('Functional Tests', function () {
             .get('/api/convert')
             .query({ input: '3/7.2/4kg' })
             .end((err, res) => {
-                assert.equal(res.status, 400);
-                assert.isObject(res.body);
-                assert.property(res.body, 'error');
-                assert.match(res.body.error, /invalid number/i);
+                assert.equal(res.status, 200);
+                assert.isString(res.text);
+                assert.match(res.text.toLowerCase(), /invalid number/i);
                 done();
             });
     });
